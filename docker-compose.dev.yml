@@ -1,0 +1,20 @@
+services:
+    frontend-dev:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        image: reservaja-frontend-dev
+        container_name: reservaja_frontend_dev
+        volumes:
+          - ".:/app"
+          - "/app/node_modules"
+        ports:
+            - "4200:4200"
+        environment:
+            - CHOKIDAR_USEPOLLING=true
+        networks:
+          - reservaja_frontend_dev_network
+
+networks:
+  reservaja_frontend_dev_network:
+    name: reservaja_frontend_dev_network
