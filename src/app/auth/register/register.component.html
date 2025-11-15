@@ -1,0 +1,60 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">Cadastro</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <input
+          class="w-full mb-1 p-2 border rounded"
+          type="text"
+          placeholder="Nome"
+          formControlName="name"
+        />
+        <div *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.invalid" class="text-red-500 text-sm">
+          Nome é obrigarório.
+        </div>
+      </div>
+      <div class="mb-4">
+        <input
+          class="w-full mb-1 p-2 border rounded"
+          type="email"
+          placeholder="Email"
+          formControlName="email"
+        />
+        <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid" class="text-red-500 text-sm">
+          <div *ngIf="registerForm.get('email')?.errors?.['required']">Email é obrigatório.</div>
+          <div *ngIf="registerForm.get('email')?.errors?.['email']">Email inválido.</div>
+        </div>
+      </div>
+      <div class="mb-4">
+        <input
+          class="w-full mb-1 p-2 border rounded"
+          type="password"
+          placeholder="Senha"
+          formControlName="password"
+        />
+        <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid" class="text-red-500 text-sm">
+          Senha é obrigatória.
+        </div>
+      </div>
+      <div class="mb-4">
+        <input
+          class="w-full mb-1 p-2 border rounded"
+          type="password"
+          placeholder="Confirmar senha"
+          formControlName="confirmPassword"
+        />
+        <div *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid" class="text-red-500 text-sm">
+          Confirmação de senha é obrigatória.
+        </div>
+      </div>
+      <div *ngIf="errorMessage" class="text-red-500 mb-4">{{ errorMessage }}</div>
+      <button
+        class="w-full py-2 rounded bg-blue-500 text-white hover:bg-blue-600 disabled:cursor-not-allowed"
+        type="submit"
+        [disabled]="loading"
+      >
+        {{ loading ? 'Cadastrando...' : 'Cadastrar' }}
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">Entrar</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <input
+          type="email"
+          placeholder="Email"
+          formControlName="email"
+          class="w-full mb-1 p-2 border rounded"
+        />
+        <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="text-red-500 text-sm">
+          <div *ngIf="loginForm.get('email')?.errors?.['required']">Email é obrigatório.</div>
+          <div *ngIf="loginForm.get('email')?.errors?.['email']">Email inválido.</div>
+        </div>
+      </div>
+      <div class="mb-4">
+        <input
+          type="password"
+          placeholder="Senha"
+          formControlName="password"
+          class="w-full mb-1 p-2 border rounded"
+        />
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="text-red-500 text-sm">
+          Senha é obrigatória.
+        </div>
+      </div>
+      <div *ngIf="errorMessage" class="text-red-500 mb-4">{{ errorMessage }}</div>
+      <button
+        class="w-full py-2 rounded bg-blue-500 text-white hover:bg-blue-600"
+        type="submit"
+      >
+        Entrar
+      </button>
+    </form>
+  </div>
+</div>
